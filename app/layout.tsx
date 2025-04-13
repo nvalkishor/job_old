@@ -1,41 +1,41 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+﻿// app/layout.tsx
+import type { Metadata } from "next";
+import { Inter } from 'next/font/google';
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import { Providers } from "@/components/providers";
+import { SetupApp } from "@/components/setup-app";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "JobPortal - Find Your Next Career",
-  description: "Job posting and application platform",
-    generator: 'v0.dev'
-}
+    title: "JobPortal - Find Your Next Career",
+    description: "Job posting and application platform",
+};
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
-  )
+    return (
+        <html lang="en">
+            <body className={inter.className}>
+                <Providers>
+                    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+                        <SetupApp />
+                        <div className="flex min-h-screen flex-col">
+                            <Header />
+                            <main className="flex-1">{children}</main>
+                            <Footer />
+                        </div>
+                        <Toaster />
+                    </ThemeProvider>
+                </Providers>
+            </body>
+        </html>
+    );
 }
-
-
-
-import './globals.css'

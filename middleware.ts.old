@@ -1,0 +1,20 @@
+﻿// middleware.ts
+import { authMiddleware } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
+
+export default authMiddleware({
+    // Public routes that don't require authentication
+    publicRoutes: [
+        '/',
+        '/jobs',
+        '/jobs/(.*)',
+        '/auth/login',
+        '/auth/register',
+        '/api/webhook/clerk',
+        '/api/webhook/supabase',
+    ],
+});
+
+export const config = {
+    matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+};
